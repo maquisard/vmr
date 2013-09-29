@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[Movie]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [Title] TEXT, 
+    [Release-Date] NVARCHAR(MAX) NULL,
+    [Video-Release-Date] NVARCHAR(MAX) NULL,
+    [IMDBUrl] TEXT NULL,     
+    [Unknown] BIT NOT NULL, 
+    [Action] BIT NOT NULL, 
+    [Adventure] BIT NOT NULL, 
+    [Animation] BIT NOT NULL, 
+    [Childrens] BIT NOT NULL, 
+    [Comedy] BIT NOT NULL, 
+    [Crime] BIT NOT NULL, 
+    [Documentary] BIT NOT NULL, 
+    [Drama] BIT NOT NULL, 
+    [Fantasy] BIT NOT NULL, 
+    [Film-Noir] BIT NOT NULL, 
+    [Horror] BIT NOT NULL, 
+    [Musical] BIT NOT NULL, 
+    [Mystery] BIT NOT NULL, 
+    [Romance] BIT NOT NULL, 
+    [Sci-Fi] BIT NOT NULL, 
+    [Thriller] BIT NOT NULL, 
+    [War] BIT NOT NULL, 
+    [Western] BIT NOT NULL
+)

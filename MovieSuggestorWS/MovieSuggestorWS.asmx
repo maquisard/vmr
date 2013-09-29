@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="MovieSuggestorWS.asmx.cs" Class="MovieSuggestorWS.Service1" %>

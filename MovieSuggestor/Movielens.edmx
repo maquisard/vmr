@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MovielensModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MovielensModelStoreContainer">
+          <EntitySet Name="Movie" EntityType="MovielensModel.Store.Movie" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Rating" EntityType="MovielensModel.Store.Rating" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="MovielensModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="Movie_Id_FK" Association="MovielensModel.Store.Movie_Id_FK">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="User_Id_FK" Association="MovielensModel.Store.User_Id_FK">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="text" />
+          <Property Name="Release-Date" Type="nvarchar(max)" />
+          <Property Name="Video-Release-Date" Type="nvarchar(max)" />
+          <Property Name="IMDBUrl" Type="text" />
+          <Property Name="Unknown" Type="bit" Nullable="false" />
+          <Property Name="Action" Type="bit" Nullable="false" />
+          <Property Name="Adventure" Type="bit" Nullable="false" />
+          <Property Name="Animation" Type="bit" Nullable="false" />
+          <Property Name="Childrens" Type="bit" Nullable="false" />
+          <Property Name="Comedy" Type="bit" Nullable="false" />
+          <Property Name="Crime" Type="bit" Nullable="false" />
+          <Property Name="Documentary" Type="bit" Nullable="false" />
+          <Property Name="Drama" Type="bit" Nullable="false" />
+          <Property Name="Fantasy" Type="bit" Nullable="false" />
+          <Property Name="Film-Noir" Type="bit" Nullable="false" />
+          <Property Name="Horror" Type="bit" Nullable="false" />
+          <Property Name="Musical" Type="bit" Nullable="false" />
+          <Property Name="Mystery" Type="bit" Nullable="false" />
+          <Property Name="Romance" Type="bit" Nullable="false" />
+          <Property Name="Sci-Fi" Type="bit" Nullable="false" />
+          <Property Name="Thriller" Type="bit" Nullable="false" />
+          <Property Name="War" Type="bit" Nullable="false" />
+          <Property Name="Western" Type="bit" Nullable="false" />
+          <Property Name="PosterUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Timestamp" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="Movie_Id_FK">
+          <End Role="Movie" Type="MovielensModel.Store.Movie" Multiplicity="1" />
+          <End Role="Rating" Type="MovielensModel.Store.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Id_FK">
+          <End Role="User" Type="MovielensModel.Store.User" Multiplicity="1" />
+          <End Role="Rating" Type="MovielensModel.Store.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovielensModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MovielensEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Movie" EntityType="MovielensModel.Movie" />
+          <EntitySet Name="Rating" EntityType="MovielensModel.Rating" />
+          <EntitySet Name="User" EntityType="MovielensModel.User" />
+          <AssociationSet Name="Movie_Id_FK" Association="MovielensModel.Movie_Id_FK">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="User_Id_FK" Association="MovielensModel.User_Id_FK">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Release_Date" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Video_Release_Date" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IMDBUrl" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Unknown" Type="Boolean" Nullable="false" />
+          <Property Name="Action" Type="Boolean" Nullable="false" />
+          <Property Name="Adventure" Type="Boolean" Nullable="false" />
+          <Property Name="Animation" Type="Boolean" Nullable="false" />
+          <Property Name="Childrens" Type="Boolean" Nullable="false" />
+          <Property Name="Comedy" Type="Boolean" Nullable="false" />
+          <Property Name="Crime" Type="Boolean" Nullable="false" />
+          <Property Name="Documentary" Type="Boolean" Nullable="false" />
+          <Property Name="Drama" Type="Boolean" Nullable="false" />
+          <Property Name="Fantasy" Type="Boolean" Nullable="false" />
+          <Property Name="Film_Noir" Type="Boolean" Nullable="false" />
+          <Property Name="Horror" Type="Boolean" Nullable="false" />
+          <Property Name="Musical" Type="Boolean" Nullable="false" />
+          <Property Name="Mystery" Type="Boolean" Nullable="false" />
+          <Property Name="Romance" Type="Boolean" Nullable="false" />
+          <Property Name="Sci_Fi" Type="Boolean" Nullable="false" />
+          <Property Name="Thriller" Type="Boolean" Nullable="false" />
+          <Property Name="War" Type="Boolean" Nullable="false" />
+          <Property Name="Western" Type="Boolean" Nullable="false" />
+          <Property Name="PosterUrl" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Rating" Relationship="MovielensModel.Movie_Id_FK" FromRole="Movie" ToRole="Rating" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Rating1" Type="Int32" Nullable="false" />
+          <Property Name="Timestamp" Type="Int32" />
+          <NavigationProperty Name="Movie" Relationship="MovielensModel.Movie_Id_FK" FromRole="Rating" ToRole="Movie" />
+          <NavigationProperty Name="User" Relationship="MovielensModel.User_Id_FK" FromRole="Rating" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Occupation" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Rating" Relationship="MovielensModel.User_Id_FK" FromRole="User" ToRole="Rating" />
+        </EntityType>
+        <Association Name="Movie_Id_FK">
+          <End Type="MovielensModel.Movie" Role="Movie" Multiplicity="1" />
+          <End Type="MovielensModel.Rating" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Id_FK">
+          <End Type="MovielensModel.User" Role="User" Multiplicity="1" />
+          <End Type="MovielensModel.Rating" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovielensModelStoreContainer" CdmEntityContainer="MovielensEntities">
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="MovielensModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release-Date" />
+                <ScalarProperty Name="Video_Release_Date" ColumnName="Video-Release-Date" />
+                <ScalarProperty Name="IMDBUrl" ColumnName="IMDBUrl" />
+                <ScalarProperty Name="Unknown" ColumnName="Unknown" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Adventure" ColumnName="Adventure" />
+                <ScalarProperty Name="Animation" ColumnName="Animation" />
+                <ScalarProperty Name="Childrens" ColumnName="Childrens" />
+                <ScalarProperty Name="Comedy" ColumnName="Comedy" />
+                <ScalarProperty Name="Crime" ColumnName="Crime" />
+                <ScalarProperty Name="Documentary" ColumnName="Documentary" />
+                <ScalarProperty Name="Drama" ColumnName="Drama" />
+                <ScalarProperty Name="Fantasy" ColumnName="Fantasy" />
+                <ScalarProperty Name="Film_Noir" ColumnName="Film-Noir" />
+                <ScalarProperty Name="Horror" ColumnName="Horror" />
+                <ScalarProperty Name="Musical" ColumnName="Musical" />
+                <ScalarProperty Name="Mystery" ColumnName="Mystery" />
+                <ScalarProperty Name="Romance" ColumnName="Romance" />
+                <ScalarProperty Name="Sci_Fi" ColumnName="Sci-Fi" />
+                <ScalarProperty Name="Thriller" ColumnName="Thriller" />
+                <ScalarProperty Name="War" ColumnName="War" />
+                <ScalarProperty Name="Western" ColumnName="Western" />
+                <ScalarProperty Name="PosterUrl" ColumnName="PosterUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rating">
+            <EntityTypeMapping TypeName="MovielensModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="Rating1" ColumnName="Rating" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="MovielensModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ruedenet.com/NC.MiddleTier/Basics/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.ruedenet.com/NC.MiddleTier/Basics/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.ruedenet.com/NC.MiddleTier/Basics/">
+      <s:element name="RunCodeUnit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="no" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunCodeUnitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunCodeUnitResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunCodeUnitWithXMLParameter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="no" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmlParameter">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunCodeUnitWithXMLParameterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunCodeUnitWithXMLParameterResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectFromTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="table" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="cols" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sorting" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectFromTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectFromTableResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectFromTableEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="table" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="cols" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sorting" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="calcs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="blobs" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="from" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="to" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="verbosity" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="definition" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectFromTableExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectFromTableExResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertIntoTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="table" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="values" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="validation" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertIntoTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertIntoTableResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyInTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="table" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="primarykey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="values" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="validation" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyInTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModifyInTableResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyManyInTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="table" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="values" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="validation" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyManyInTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModifyManyInTableResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteFromTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="table" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="primarykey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="validation" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteFromTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteFromTableResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteManyFromTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="table" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="key" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="validation" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteManyFromTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteManyFromTableResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="no" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="replytype" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunReportResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTableDefinition">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="table" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTableDefinitionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTableDefinitionResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunCodeUnitModeless">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="no" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RunCodeUnitModelessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunCodeUnitModelessResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XmlPortOut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="no" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XmlPortOutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XmlPortOutResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XmlPortIn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="no" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmlParameter">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XmlPortInResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XmlPortInResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RunCodeUnitSoapIn">
+    <wsdl:part name="parameters" element="tns:RunCodeUnit" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitSoapOut">
+    <wsdl:part name="parameters" element="tns:RunCodeUnitResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitWithXMLParameterSoapIn">
+    <wsdl:part name="parameters" element="tns:RunCodeUnitWithXMLParameter" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitWithXMLParameterSoapOut">
+    <wsdl:part name="parameters" element="tns:RunCodeUnitWithXMLParameterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectFromTable" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectFromTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableExSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectFromTableEx" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableExSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectFromTableExResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertIntoTableSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertIntoTable" />
+  </wsdl:message>
+  <wsdl:message name="InsertIntoTableSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertIntoTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyInTableSoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyInTable" />
+  </wsdl:message>
+  <wsdl:message name="ModifyInTableSoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyInTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyManyInTableSoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyManyInTable" />
+  </wsdl:message>
+  <wsdl:message name="ModifyManyInTableSoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyManyInTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFromTableSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteFromTable" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFromTableSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteFromTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteManyFromTableSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteManyFromTable" />
+  </wsdl:message>
+  <wsdl:message name="DeleteManyFromTableSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteManyFromTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunReportSoapIn">
+    <wsdl:part name="parameters" element="tns:RunReport" />
+  </wsdl:message>
+  <wsdl:message name="RunReportSoapOut">
+    <wsdl:part name="parameters" element="tns:RunReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTableDefinitionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTableDefinition" />
+  </wsdl:message>
+  <wsdl:message name="GetTableDefinitionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTableDefinitionResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitModelessSoapIn">
+    <wsdl:part name="parameters" element="tns:RunCodeUnitModeless" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitModelessSoapOut">
+    <wsdl:part name="parameters" element="tns:RunCodeUnitModelessResponse" />
+  </wsdl:message>
+  <wsdl:message name="XmlPortOutSoapIn">
+    <wsdl:part name="parameters" element="tns:XmlPortOut" />
+  </wsdl:message>
+  <wsdl:message name="XmlPortOutSoapOut">
+    <wsdl:part name="parameters" element="tns:XmlPortOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="XmlPortInSoapIn">
+    <wsdl:part name="parameters" element="tns:XmlPortIn" />
+  </wsdl:message>
+  <wsdl:message name="XmlPortInSoapOut">
+    <wsdl:part name="parameters" element="tns:XmlPortInResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="no" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="cols" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="sorting" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableExHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="cols" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="sorting" type="s:string" />
+    <wsdl:part name="calcs" type="s:string" />
+    <wsdl:part name="blobs" type="s:string" />
+    <wsdl:part name="from" type="s:string" />
+    <wsdl:part name="to" type="s:string" />
+    <wsdl:part name="verbosity" type="s:string" />
+    <wsdl:part name="definition" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableExHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="InsertIntoTableHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="values" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertIntoTableHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ModifyInTableHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="primarykey" type="s:string" />
+    <wsdl:part name="values" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyInTableHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ModifyManyInTableHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="values" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyManyInTableHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFromTableHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="primarykey" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFromTableHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="DeleteManyFromTableHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteManyFromTableHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="RunReportHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="no" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="replytype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RunReportHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetTableDefinitionHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTableDefinitionHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitModelessHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="no" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitModelessHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="XmlPortOutHttpGetIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="no" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="XmlPortOutHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="no" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="cols" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="sorting" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableExHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="cols" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="sorting" type="s:string" />
+    <wsdl:part name="calcs" type="s:string" />
+    <wsdl:part name="blobs" type="s:string" />
+    <wsdl:part name="from" type="s:string" />
+    <wsdl:part name="to" type="s:string" />
+    <wsdl:part name="verbosity" type="s:string" />
+    <wsdl:part name="definition" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelectFromTableExHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="InsertIntoTableHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="values" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertIntoTableHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ModifyInTableHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="primarykey" type="s:string" />
+    <wsdl:part name="values" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyInTableHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="ModifyManyInTableHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="values" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyManyInTableHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFromTableHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="primarykey" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteFromTableHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="DeleteManyFromTableHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="filter" type="s:string" />
+    <wsdl:part name="validation" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteManyFromTableHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="RunReportHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="no" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="replytype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RunReportHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="GetTableDefinitionHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTableDefinitionHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitModelessHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="no" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RunCodeUnitModelessHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="XmlPortOutHttpPostIn">
+    <wsdl:part name="serviceName" type="s:string" />
+    <wsdl:part name="no" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="XmlPortOutHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:portType name="BasicsSoap">
+    <wsdl:operation name="RunCodeUnit">
+      <wsdl:input message="tns:RunCodeUnitSoapIn" />
+      <wsdl:output message="tns:RunCodeUnitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitWithXMLParameter">
+      <wsdl:input message="tns:RunCodeUnitWithXMLParameterSoapIn" />
+      <wsdl:output message="tns:RunCodeUnitWithXMLParameterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTable">
+      <wsdl:input message="tns:SelectFromTableSoapIn" />
+      <wsdl:output message="tns:SelectFromTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTableEx">
+      <wsdl:input message="tns:SelectFromTableExSoapIn" />
+      <wsdl:output message="tns:SelectFromTableExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoTable">
+      <wsdl:input message="tns:InsertIntoTableSoapIn" />
+      <wsdl:output message="tns:InsertIntoTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyInTable">
+      <wsdl:input message="tns:ModifyInTableSoapIn" />
+      <wsdl:output message="tns:ModifyInTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyManyInTable">
+      <wsdl:input message="tns:ModifyManyInTableSoapIn" />
+      <wsdl:output message="tns:ModifyManyInTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromTable">
+      <wsdl:input message="tns:DeleteFromTableSoapIn" />
+      <wsdl:output message="tns:DeleteFromTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteManyFromTable">
+      <wsdl:input message="tns:DeleteManyFromTableSoapIn" />
+      <wsdl:output message="tns:DeleteManyFromTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <wsdl:input message="tns:RunReportSoapIn" />
+      <wsdl:output message="tns:RunReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTableDefinition">
+      <wsdl:input message="tns:GetTableDefinitionSoapIn" />
+      <wsdl:output message="tns:GetTableDefinitionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitModeless">
+      <wsdl:input message="tns:RunCodeUnitModelessSoapIn" />
+      <wsdl:output message="tns:RunCodeUnitModelessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortOut">
+      <wsdl:input message="tns:XmlPortOutSoapIn" />
+      <wsdl:output message="tns:XmlPortOutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortIn">
+      <wsdl:input message="tns:XmlPortInSoapIn" />
+      <wsdl:output message="tns:XmlPortInSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BasicsHttpGet">
+    <wsdl:operation name="RunCodeUnit">
+      <wsdl:input message="tns:RunCodeUnitHttpGetIn" />
+      <wsdl:output message="tns:RunCodeUnitHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTable">
+      <wsdl:input message="tns:SelectFromTableHttpGetIn" />
+      <wsdl:output message="tns:SelectFromTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTableEx">
+      <wsdl:input message="tns:SelectFromTableExHttpGetIn" />
+      <wsdl:output message="tns:SelectFromTableExHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoTable">
+      <wsdl:input message="tns:InsertIntoTableHttpGetIn" />
+      <wsdl:output message="tns:InsertIntoTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyInTable">
+      <wsdl:input message="tns:ModifyInTableHttpGetIn" />
+      <wsdl:output message="tns:ModifyInTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyManyInTable">
+      <wsdl:input message="tns:ModifyManyInTableHttpGetIn" />
+      <wsdl:output message="tns:ModifyManyInTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromTable">
+      <wsdl:input message="tns:DeleteFromTableHttpGetIn" />
+      <wsdl:output message="tns:DeleteFromTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteManyFromTable">
+      <wsdl:input message="tns:DeleteManyFromTableHttpGetIn" />
+      <wsdl:output message="tns:DeleteManyFromTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <wsdl:input message="tns:RunReportHttpGetIn" />
+      <wsdl:output message="tns:RunReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTableDefinition">
+      <wsdl:input message="tns:GetTableDefinitionHttpGetIn" />
+      <wsdl:output message="tns:GetTableDefinitionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitModeless">
+      <wsdl:input message="tns:RunCodeUnitModelessHttpGetIn" />
+      <wsdl:output message="tns:RunCodeUnitModelessHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortOut">
+      <wsdl:input message="tns:XmlPortOutHttpGetIn" />
+      <wsdl:output message="tns:XmlPortOutHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BasicsHttpPost">
+    <wsdl:operation name="RunCodeUnit">
+      <wsdl:input message="tns:RunCodeUnitHttpPostIn" />
+      <wsdl:output message="tns:RunCodeUnitHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTable">
+      <wsdl:input message="tns:SelectFromTableHttpPostIn" />
+      <wsdl:output message="tns:SelectFromTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTableEx">
+      <wsdl:input message="tns:SelectFromTableExHttpPostIn" />
+      <wsdl:output message="tns:SelectFromTableExHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoTable">
+      <wsdl:input message="tns:InsertIntoTableHttpPostIn" />
+      <wsdl:output message="tns:InsertIntoTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyInTable">
+      <wsdl:input message="tns:ModifyInTableHttpPostIn" />
+      <wsdl:output message="tns:ModifyInTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyManyInTable">
+      <wsdl:input message="tns:ModifyManyInTableHttpPostIn" />
+      <wsdl:output message="tns:ModifyManyInTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromTable">
+      <wsdl:input message="tns:DeleteFromTableHttpPostIn" />
+      <wsdl:output message="tns:DeleteFromTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteManyFromTable">
+      <wsdl:input message="tns:DeleteManyFromTableHttpPostIn" />
+      <wsdl:output message="tns:DeleteManyFromTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <wsdl:input message="tns:RunReportHttpPostIn" />
+      <wsdl:output message="tns:RunReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTableDefinition">
+      <wsdl:input message="tns:GetTableDefinitionHttpPostIn" />
+      <wsdl:output message="tns:GetTableDefinitionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitModeless">
+      <wsdl:input message="tns:RunCodeUnitModelessHttpPostIn" />
+      <wsdl:output message="tns:RunCodeUnitModelessHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortOut">
+      <wsdl:input message="tns:XmlPortOutHttpPostIn" />
+      <wsdl:output message="tns:XmlPortOutHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicsSoap" type="tns:BasicsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RunCodeUnit">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/RunCodeUnit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitWithXMLParameter">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/RunCodeUnitWithXMLParameter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTable">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/SelectFromTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTableEx">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/SelectFromTableEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoTable">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/InsertIntoTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyInTable">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/ModifyInTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyManyInTable">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/ModifyManyInTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromTable">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/DeleteFromTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteManyFromTable">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/DeleteManyFromTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/RunReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTableDefinition">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/GetTableDefinition" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitModeless">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/RunCodeUnitModeless" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortOut">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/XmlPortOut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortIn">
+      <soap:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/XmlPortIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicsSoap12" type="tns:BasicsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RunCodeUnit">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/RunCodeUnit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitWithXMLParameter">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/RunCodeUnitWithXMLParameter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTable">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/SelectFromTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTableEx">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/SelectFromTableEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoTable">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/InsertIntoTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyInTable">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/ModifyInTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyManyInTable">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/ModifyManyInTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromTable">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/DeleteFromTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteManyFromTable">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/DeleteManyFromTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/RunReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTableDefinition">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/GetTableDefinition" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitModeless">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/RunCodeUnitModeless" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortOut">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/XmlPortOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortIn">
+      <soap12:operation soapAction="http://www.ruedenet.com/NC.MiddleTier/Basics/XmlPortIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicsHttpGet" type="tns:BasicsHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="RunCodeUnit">
+      <http:operation location="/RunCodeUnit" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTable">
+      <http:operation location="/SelectFromTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTableEx">
+      <http:operation location="/SelectFromTableEx" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoTable">
+      <http:operation location="/InsertIntoTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyInTable">
+      <http:operation location="/ModifyInTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyManyInTable">
+      <http:operation location="/ModifyManyInTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromTable">
+      <http:operation location="/DeleteFromTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteManyFromTable">
+      <http:operation location="/DeleteManyFromTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <http:operation location="/RunReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTableDefinition">
+      <http:operation location="/GetTableDefinition" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitModeless">
+      <http:operation location="/RunCodeUnitModeless" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortOut">
+      <http:operation location="/XmlPortOut" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicsHttpPost" type="tns:BasicsHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="RunCodeUnit">
+      <http:operation location="/RunCodeUnit" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTable">
+      <http:operation location="/SelectFromTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectFromTableEx">
+      <http:operation location="/SelectFromTableEx" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoTable">
+      <http:operation location="/InsertIntoTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyInTable">
+      <http:operation location="/ModifyInTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyManyInTable">
+      <http:operation location="/ModifyManyInTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromTable">
+      <http:operation location="/DeleteFromTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteManyFromTable">
+      <http:operation location="/DeleteManyFromTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <http:operation location="/RunReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTableDefinition">
+      <http:operation location="/GetTableDefinition" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunCodeUnitModeless">
+      <http:operation location="/RunCodeUnitModeless" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XmlPortOut">
+      <http:operation location="/XmlPortOut" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Basics">
+    <wsdl:port name="BasicsSoap" binding="tns:BasicsSoap">
+      <soap:address location="http://nc.ruedenet.net/NETConductor/Basics.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BasicsSoap12" binding="tns:BasicsSoap12">
+      <soap12:address location="http://nc.ruedenet.net/NETConductor/Basics.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BasicsHttpGet" binding="tns:BasicsHttpGet">
+      <http:address location="http://nc.ruedenet.net/NETConductor/Basics.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BasicsHttpPost" binding="tns:BasicsHttpPost">
+      <http:address location="http://nc.ruedenet.net/NETConductor/Basics.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,36 @@
+/* 
+    Document   : VizInit
+    Created on : Apr 21, 2013, 2:18:26 PM
+    Author     : El Zede @ CSDL
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+graph {   }
+
+edge { visibility-mode: hidden; }
+
+node
+{
+    fill-mode: image-scaled-ratio-max;
+    size: 90px;
+    stroke-mode: plain;
+    stroke-color: grey;
+}
+
+node:clicked
+{
+    shadow-mode: plain;
+    shadow-width: 3px;
+    shadow-color: #FC0; 
+    shadow-offset: 0px;
+}
+
+node:selected
+{
+    shadow-mode: plain;
+    shadow-width: 3px;
+    shadow-color: #FC0; 
+    shadow-offset: 0px;
+}
