@@ -1,0 +1,44 @@
+<ArrayOfItem>
+	<Item>
+		<Id>1</Id>
+		<Title>Toy Story (1995)</Title>
+		<Release_Date>01-Jan-1995</Release_Date>
+		<Description>Toy Story (1995)</Description>
+		<Attributes>
+			<Attribute Key="Genre" Value="Animation"/>
+			<Attribute Key="Genre" Value="Childrens"/>
+			<Attribute Key="Genre" Value="Comedy"/>
+		</Attributes>
+	</Item>
+	<Item>
+		<Id>2</Id>
+		<Title>GoldenEye (1995)</Title>
+		<Release_Date>01-Jan-1995</Release_Date>
+		<Description>GoldenEye (1995)</Description>
+		<Attributes>
+			<Attribute Key="Genre" Value="Action"/>
+			<Attribute Key="Genre" Value="Adventure"/>
+			<Attribute Key="Genre" Value="Thriller"/>
+		</Attributes>
+	</Item>
+	<Item>
+		<Id>3</Id>
+		<Title>Four Rooms (1995)</Title>
+		<Release_Date>01-Jan-1995</Release_Date>
+		<Description>Four Rooms (1995)</Description>
+		<Attributes>
+			<Attribute Key="Genre" Value="Thriller"/>
+		</Attributes>
+	</Item>
+	<Item>
+		<Id>4</Id>
+		<Title>Get Shorty (1995)</Title>
+		<Release_Date>01-Jan-1995</Release_Date>
+		<Description>Get Shorty (1995)</Description>
+		<Attributes>
+			<Attribute Key="Genre" Value="Action"/>
+			<Attribute Key="Genre" Value="Comedy"/>
+			<Attribute Key="Genre" Value="Drama"/>
+			</Attributes>
+	</Item>
+</ArrayOfItem>

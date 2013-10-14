@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="634Code"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libraries/applications.libraries.datamanagement.jar" sourcepath="src.zip"/>
+	<classpathentry kind="lib" path="libraries/guava-11.0.2.jar"/>
+	<classpathentry kind="lib" path="libraries/javassist-3.12.1.GA.jar"/>
+	<classpathentry kind="lib" path="libraries/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libraries/mail.jar"/>
+	<classpathentry kind="lib" path="libraries/mysql-connector-java-5.1.18-bin.jar"/>
+	<classpathentry kind="lib" path="libraries/persist-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libraries/reflections-0.9.8.jar"/>
+	<classpathentry kind="lib" path="libraries/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libraries/slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libraries/api-common-1.0.jar"/>
+	<classpathentry kind="lib" path="libraries/jackson-annotations-2.2.3.jar"/>
+	<classpathentry kind="lib" path="libraries/jackson-core-2.2.3.jar"/>
+	<classpathentry kind="lib" path="libraries/jackson-databind-2.2.3.jar"/>
+	<classpathentry kind="lib" path="libraries/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="libraries/slf4j-api-1.7.5.jar"/>
+	<classpathentry kind="lib" path="libraries/slf4j-jdk14-1.7.5.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-dbcp-1.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-dbcp-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-dbcp-1.4.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-pool-1.6.jar"/>
+	<classpathentry kind="lib" path="libraries/httpclient-4.3.1.jar"/>
+	<classpathentry kind="lib" path="libraries/httpcore-4.3.jar"/>
+	<classpathentry kind="lib" path="libraries/themoviedbapi-3.7.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
