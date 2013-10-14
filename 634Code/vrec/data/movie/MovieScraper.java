@@ -374,6 +374,7 @@ public class MovieScraper extends Scraper
             Logger.getLogger(MovieScraper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     private void importOccupations()
     {
         try 
@@ -403,13 +404,29 @@ public class MovieScraper extends Scraper
         //this.importGenres();
         //this.importErsb();
     	
-        this.cleanMovieData();
-        this.importMovies();
+//        this.cleanMovieData();
+//        this.importMovies();
 
         //this.updateUserCredentials();
         //this.importRatings();
         //this.updateRatings();
-    	this.updateTrailers();
+//    	this.updateTrailers();
+    	this.updateImageDirectory();
+    }
+    
+    private void updateImageDirectory()
+    {
+        File imageDir = new File(this.getItemPosterPath());
+        for(File image : imageDir.listFiles())
+        {
+        	String filename = image.getName().split("\\.")[0];
+        	MovieItem movie = MovieItem.retrieveById(MovieItem.class, filename);
+        	if(movie == null)
+        	{
+        		image.delete();
+        		System.out.println("deleting - " + filename);
+        	}
+        }
     }
     
     private void updateTrailers()
@@ -443,7 +460,7 @@ public class MovieScraper extends Scraper
 	                    if(trailerdata.get("youtube") != null)
 	                    {
 	                        JSONArray data = (JSONArray) parser.parse(trailerdata.get("youtube").toString());
-	                        if(data.size() == 0)
+	                        if(!data.isEmpty())
 	                        {
 		                        JSONObject trailer = (JSONObject)data.get(0); //just take the first one and do not care about the other ones.
 		                        String source = trailer.get("source").toString();
@@ -454,7 +471,7 @@ public class MovieScraper extends Scraper
 	                    else if(trailerdata.get("quicktime") != null)
 	                    {
 	                        JSONArray data = (JSONArray) parser.parse(trailerdata.get("quicktime").toString());
-	                        if(data.size() == 0)
+	                        if(!data.isEmpty())
 	                        {
 		                        JSONObject trailer = (JSONObject)data.get(0); //just take the first one and do not care about the other ones.
 		                        String source = trailer.get("source").toString();
