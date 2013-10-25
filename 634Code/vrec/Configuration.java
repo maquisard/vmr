@@ -16,7 +16,7 @@ public class Configuration
             
     public static void initStorage()
     {
-        configuration.Configuration.getCurrent().setResource(resource);
+        configuration.Configuration.getCurrent().setResource(resource); 
     }
 
 }

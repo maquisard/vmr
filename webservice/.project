@@ -3,6 +3,7 @@
 	<name>vrecservice</name>
 	<comment></comment>
 	<projects>
+		<project>vrec</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

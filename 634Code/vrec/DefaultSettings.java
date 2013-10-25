@@ -55,6 +55,11 @@ public class DefaultSettings extends settings.DefaultSettings
         return getValue("item.package");
     }
     
+    public int getUserMlMaxId()
+    {
+    	return Integer.parseInt(getValue("user.ml_id.max"));
+    }
+    
     public MovieErsbRating getDefaultContentRating()
     {
         if(defaultContentRating == null)

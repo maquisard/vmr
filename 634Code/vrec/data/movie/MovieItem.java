@@ -72,7 +72,7 @@ public class MovieItem extends Item
     
     private List<MovieCastMember> retrieveMembersByType(String type)
     {
-        List<MovieCastMember> returnMembers = new ArrayList<>();
+        List<MovieCastMember> returnMembers = new ArrayList<MovieCastMember>(); 
         for(MovieCastMember member : this.retrieveCastMembers())
         {
             if(member.getMemberType().equals(type))

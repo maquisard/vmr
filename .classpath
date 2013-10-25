@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="634Code"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libraries/applications.libraries.datamanagement.jar" sourcepath="src.zip"/>
 	<classpathentry kind="lib" path="libraries/guava-11.0.2.jar"/>
 	<classpathentry kind="lib" path="libraries/javassist-3.12.1.GA.jar"/>
@@ -29,5 +28,19 @@
 	<classpathentry kind="lib" path="libraries/httpclient-4.3.1.jar"/>
 	<classpathentry kind="lib" path="libraries/httpcore-4.3.jar"/>
 	<classpathentry kind="lib" path="libraries/themoviedbapi-3.7.jar"/>
+	<classpathentry kind="lib" path="libraries/flexjson-2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="libraries/flexjson-2.1-sources.jar"/>
+	<classpathentry kind="lib" path="libraries/flexjson-2.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.utility"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
