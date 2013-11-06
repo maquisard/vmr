@@ -12,6 +12,10 @@ import net.sf.persist.annotations.NoColumn;
 import vrec.DefaultSettings;
 import vrec.data.JSONFilterable;
 import vrec.data.User;
+import vrec.data.UserItem;
+import core.FilterNode;
+import core.Join;
+import core.OrderBy;
 import core.Query;
 import flexjson.JSONSerializer;
 
@@ -77,6 +81,41 @@ public class MovieUser extends User implements JSONFilterable
     		users.add(user);
     	}
     	return users;
+    }
+    
+    public List<MovieItem> retrieveMovieQueue()
+    {
+    	return this.retrieveMoviesByStatus(UserItem.QUEUE);
+    }
+    
+    public List<MovieItem> retrieveBrowsedMovies()
+    {
+    	return this.retrieveMoviesByStatus(UserItem.BROWSED);
+    }
+    
+    public List<MovieItem> retrieveWatchedMovies(int index, int size)
+    {
+    	Query query = new Query("movieitem");
+    	query.setLimitIndex(index);
+    	query.setLimitSize(size);
+    	query.orderBy("imdbrating", OrderBy.DESC);
+    	Join join = new Join("movieitem", "ml_id", "itemrating", "itemid");
+    	query.join(join);
+    	FilterNode filter = new FilterNode("userid", "" + this.ml_id);
+    	filter.setTablename("itemrating");
+    	query.filter(filter);
+    	return query.run(MovieItem.class);
+    }
+    
+    private List<MovieItem> retrieveMoviesByStatus(int status)
+    {
+    	Query query = new Query("movieitem");
+    	Join join = new Join("movieitem", "ml_id", "useritem", "itemid");
+    	query.join(join);
+    	FilterNode filter = (FilterNode) (new FilterNode("userid", "" + this.ml_id)).and(new FilterNode("status", status));
+    	filter.setTablename("useritem");
+    	query.filter(filter);
+    	return query.run(MovieItem.class);
     }
 
 	@Override

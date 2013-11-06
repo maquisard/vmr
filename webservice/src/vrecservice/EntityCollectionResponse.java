@@ -4,9 +4,8 @@ import java.util.List;
 
 import core.Entity;
 import vrec.data.JSONFilterable;
-import vrec.data.JSONSerializable;
 
-public class EntityCollectionResponse<T extends Entity> extends AbstractResponse implements JSONSerializable
+public class EntityCollectionResponse<T extends Entity> extends AbstractResponse
 {
 	private List<T> entities;
 	private String entityType;
@@ -20,7 +19,7 @@ public class EntityCollectionResponse<T extends Entity> extends AbstractResponse
 	@Override
 	public String JSONSerialize() 
 	{
-		serializer = serializer.exclude("*.id", "serializer", "*.persisted", "*.allFields").include("entities");
+		serializer = serializer.exclude("serializer", "*.persisted", "*.allFields").include("entities");
 		for(T entity : entities)
 		{
 			if(entity instanceof JSONFilterable)

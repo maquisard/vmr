@@ -1,11 +1,10 @@
 package vrecservice;
 
 import vrec.data.JSONFilterable;
-import vrec.data.JSONSerializable;
 import core.Entity;
 import flexjson.JSON;
 
-public class EntityResponse<T extends Entity> extends AbstractResponse implements JSONSerializable
+public class EntityResponse<T extends Entity> extends AbstractResponse
 {
 	private T entity;
 	private String entityType;

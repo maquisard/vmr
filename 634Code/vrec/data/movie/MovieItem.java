@@ -11,17 +11,20 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.sf.persist.annotations.NoColumn;
 import vrec.DefaultSettings;
 import vrec.data.Item;
+import vrec.data.JSONFilterable;
 import core.FilterNode;
 import core.Join;
 import core.Query;
+import flexjson.JSONSerializer;
 
 /**
  *
  * @author El Zede
  */
-public class MovieItem extends Item
+public class MovieItem extends Item implements JSONFilterable
 {
     private String ersbRatingid = DefaultSettings.getCurrent().getDefaultContentRating().getId();
     private String runtime = "0 mins";
@@ -36,7 +39,8 @@ public class MovieItem extends Item
     
     public MovieItem() { }
     
-    public MovieErsbRating retrieveErsbRating()
+    @NoColumn
+    public MovieErsbRating getErsbRating()
     {
         if(ersb == null)
         {
@@ -45,6 +49,24 @@ public class MovieItem extends Item
         return ersb;
     }
     
+    public void decodeMembersName()
+    {
+    	for(MovieCastMember member : this.getCastMembers())
+    	{
+    		member.decodeName();
+    	}
+    }
+    
+    public static MovieItem retrieveByMl_Id(String ml_id)
+    {
+        Query query = new Query("movieitem");
+        query.filter("ml_id", ml_id);
+        List<MovieItem> items = query.run(MovieItem.class);
+        if(items.isEmpty()) return null;
+        
+        return items.get(0);
+    }
+
     public static MovieItem retrieveByImdbId(String imdbid)
     {
         Query query = new Query("movieitem");
@@ -54,6 +76,13 @@ public class MovieItem extends Item
         
         return items.get(0);
     }
+    
+    @Override
+	public JSONSerializer filter(JSONSerializer serializer) 
+	{
+		serializer = serializer.exclude("*.ersbRatingid", "*.posterUrl").include("*.ersb", "*.castMembers", "*.genres");
+		return serializer;
+	}
     
     public List<MovieCastMember> retrieveDirectors()
     {
@@ -73,7 +102,7 @@ public class MovieItem extends Item
     private List<MovieCastMember> retrieveMembersByType(String type)
     {
         List<MovieCastMember> returnMembers = new ArrayList<MovieCastMember>(); 
-        for(MovieCastMember member : this.retrieveCastMembers())
+        for(MovieCastMember member : this.getCastMembers())
         {
             if(member.getMemberType().equals(type))
             {
@@ -83,7 +112,8 @@ public class MovieItem extends Item
         return returnMembers;
     }
     
-    public List<MovieCastMember> retrieveCastMembers()
+    @NoColumn
+    public List<MovieCastMember> getCastMembers()
     {
         if(castMembers == null || castMembers.isEmpty())
         {
@@ -96,7 +126,8 @@ public class MovieItem extends Item
         return castMembers;
     }
     
-    public List<MovieGenre> retrieveGenres()
+    @NoColumn
+    public List<MovieGenre> getGenres()
     {
         if(genres == null || genres.isEmpty())
         {
@@ -183,7 +214,7 @@ public class MovieItem extends Item
     public String buildBagOfWords() 
     {
         String bag = super.buildBagOfWords();
-        for(MovieCastMember member : this.retrieveCastMembers())
+        for(MovieCastMember member : this.getCastMembers())
         {
             try {
                 bag += " " + URLDecoder.decode(member.getName(), "UTF-8");

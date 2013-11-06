@@ -1,8 +1,7 @@
 package vrecservice;
 
-import vrec.data.JSONSerializable;
 
-public class MessageResponse extends AbstractResponse implements JSONSerializable
+public class MessageResponse extends AbstractResponse
 {
 	private String message;
 	

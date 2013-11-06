@@ -4,9 +4,12 @@
  */
 package vrec.data.movie;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.List;
+
 import core.Entity;
 import core.Query;
-import java.util.List;
 
 /**
  *
@@ -37,6 +40,17 @@ public class MovieCastMember extends Entity
         if(members.size() == 1) return members.get(0);
         
         return null;
+    }
+    
+    public void decodeName()
+    {
+    	try 
+    	{
+			name = URLDecoder.decode(this.name, "UTF-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
     }
     
 

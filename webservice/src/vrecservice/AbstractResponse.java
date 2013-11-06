@@ -1,10 +1,12 @@
 package vrecservice;
 
+import vrec.data.JSONSerializable;
+
 import com.google.gson.annotations.Expose;
 
 import flexjson.JSONSerializer;
 
-public abstract class AbstractResponse
+public abstract class AbstractResponse implements JSONSerializable
 {
 	public JSONSerializer serializer;
 	
@@ -27,4 +29,13 @@ public abstract class AbstractResponse
 		this.status = status;
 	}
 	
+	public String output()
+	{
+		return "jsonCallBack(" + this.JSONSerialize() + ");";
+	}
+	
+	public String output(String callback)
+	{
+		return callback + "(" + this.JSONSerialize() + ");";
+	}
 }
