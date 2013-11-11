@@ -83,14 +83,17 @@ public class MovieUser extends User implements JSONFilterable
     	return users;
     }
     
-    public List<MovieItem> retrieveMovieQueue()
+    public List<MovieItem> retrieveMovieQueue(int index, int size)
     {
-    	return this.retrieveMoviesByStatus(UserItem.QUEUE);
+    	Query query = this.retrieveMoviesByStatus(UserItem.QUEUE);
+    	query.setLimitIndex(index);
+    	query.setLimitSize(size);
+    	return query.run(MovieItem.class);
     }
     
     public List<MovieItem> retrieveBrowsedMovies()
     {
-    	return this.retrieveMoviesByStatus(UserItem.BROWSED);
+    	return this.retrieveMoviesByStatus(UserItem.BROWSED).run(MovieItem.class);
     }
     
     public List<MovieItem> retrieveWatchedMovies(int index, int size)
@@ -107,21 +110,24 @@ public class MovieUser extends User implements JSONFilterable
     	return query.run(MovieItem.class);
     }
     
-    private List<MovieItem> retrieveMoviesByStatus(int status)
+    private Query retrieveMoviesByStatus(int status)
     {
     	Query query = new Query("movieitem");
     	Join join = new Join("movieitem", "ml_id", "useritem", "itemid");
     	query.join(join);
-    	FilterNode filter = (FilterNode) (new FilterNode("userid", "" + this.ml_id)).and(new FilterNode("status", status));
-    	filter.setTablename("useritem");
-    	query.filter(filter);
-    	return query.run(MovieItem.class);
+    	query.orderBy("imdbrating", OrderBy.DESC);
+    	FilterNode userFilter = new FilterNode("userid", "" + this.ml_id);
+    	userFilter.setTablename("useritem");
+    	FilterNode statusFilter = new FilterNode("status", status);
+    	statusFilter.setTablename("useritem");
+    	query.filter(userFilter.and(statusFilter));
+    	return query;
     }
 
 	@Override
 	public JSONSerializer filter(JSONSerializer serializer) 
 	{
-		serializer = serializer.exclude("*.password", "*.occupationid").include("*.occupation");
+		serializer = serializer.exclude("*.password", "*.occupationid", "*.id").include("*.occupation");
 		return serializer;
 	}
     

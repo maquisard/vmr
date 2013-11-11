@@ -1,6 +1,8 @@
 package vrec.data;
 
 import core.Entity;
+import core.FilterNode;
+import core.Query;
 
 public class UserItem extends Entity
 {
@@ -14,6 +16,19 @@ public class UserItem extends Entity
     private String userid;
     private int status;
     private String itemtype;
+    
+    
+    public static boolean exist(UserItem useritem)
+    {
+    	Query query = new Query("useritem");
+    	query.filter(new FilterNode("itemid", useritem.getItemid())
+    			.and(new FilterNode("userid", useritem.getUserid())
+    			.and(new FilterNode("status", useritem.getStatus())
+    			.and(new FilterNode("itemtype", useritem.getItemtype())))));
+    	
+    	return query.run(UserItem.class).size() == 1;
+    }
+    
 	/**
 	 * @return the itemid
 	 */

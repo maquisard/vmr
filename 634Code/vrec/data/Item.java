@@ -4,6 +4,10 @@
  */
 package vrec.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.persist.annotations.NoColumn;
 import core.Entity;
 
 /**
@@ -16,6 +20,7 @@ public abstract class Item extends Entity
     protected int year = -1;
     protected String description = "No description available.";
     protected String posterUrl = "images/default.png";
+    protected List<ItemAttribute> attributes = new ArrayList<ItemAttribute>();
 
     /**
      * @return the title
@@ -77,4 +82,20 @@ public abstract class Item extends Entity
     {
         return this.title + " " + this.description + " " + this.year;
     }
+
+	/**
+	 * @return the attributes
+	 */
+    @NoColumn
+	public List<ItemAttribute> getAttributes() {
+		return attributes;
+	}
+
+	/**
+	 * @param attributes the attributes to set
+	 */
+    @NoColumn
+	public void setAttributes(List<ItemAttribute> attributes) {
+		this.attributes = attributes;
+	}
 }

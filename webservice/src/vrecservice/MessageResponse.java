@@ -8,6 +8,7 @@ public class MessageResponse extends AbstractResponse
 	public MessageResponse(String message)
 	{
 		this.setMessage(message);
+		this.setStatus(true);
 	}
 
 	/**

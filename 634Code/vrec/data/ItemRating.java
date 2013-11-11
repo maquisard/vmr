@@ -22,6 +22,21 @@ public class ItemRating extends Entity
     private float rating;
     private String itemtype;
 
+    public static ItemRating retrieveItemRating(String itemId, String userId)
+    {
+    	Query query = new Query("itemrating");
+    	query.filter(new FilterNode("itemid", itemId)
+    			.and(new FilterNode("userid", userId)
+    			.and(new FilterNode("itemtype", DefaultSettings.getCurrent().getItemClass()))));
+    	
+    	List<ItemRating> results = query.run(ItemRating.class);
+    	if(results.size() == 1)
+    	{
+    		return results.get(0);
+    	}
+    	return null;
+    }
+    
     /**
      * @return the itemId
      */

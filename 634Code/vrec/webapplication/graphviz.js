@@ -76,10 +76,12 @@
 			  node.data.icon = new Image();
 			  node.data.icon.src = 'images/test_icon.png';
 		  }
-		  ctx.font="30px Verdana"
-		  ctx.fillStyle = 'red'
-		  ctx.fillText(node.name, x, y);
-		  ctx.drawImage(node.data.icon, x, y, node.data.width, node.data.height);
+//		  ctx.font="30px Verdana"
+//		  ctx.fillStyle = 'red'
+//		  ctx.fillText(node.name, x, y);
+		  var icon = new Image();
+		  icon.src = node.data.icon;
+		  ctx.drawImage(icon, x, y, node.data.width, node.data.height);
 		  
           // draw a rectangle centered at pt
           //var w = 100
@@ -156,33 +158,58 @@
     return that
   }    
 
-  $(document).ready(function(){
-    var sys = arbor.ParticleSystem(1000, 600, 0.5) // create the system with sensible repulsion/stiffness/friction
-    sys.parameters({gravity:true}) // use center-gravity to make the graph settle nicely (ymmv)
-    sys.renderer = Renderer("#viewport") // our newly created renderer will have its .init() method called shortly by sys...
-	var defaultWidth = 40
-	var defaultHeight = 40
-	var defaultWeight = 4
-
-    // add some nodes to the graph and watch it go...
-	sys.addNode('a', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
-	sys.addNode('b', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
-	sys.addNode('c', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
-	sys.addNode('d', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
-	sys.addNode('e', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
-	sys.addNode('f', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
-	sys.addNode('g', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
-		
-    sys.addEdge('a','b', {weight:defaultWeight})
-    sys.addEdge('a','c', {weight:defaultWeight})
-    sys.addEdge('a','d', {weight:defaultWeight})
-    sys.addEdge('a','e', {weight:defaultWeight})
-	sys.addEdge('e','f', {weight:defaultWeight})
-	sys.addEdge('f','g', {weight:defaultWeight})
-    
-  })
-
-})(this.jQuery)
+//  $(document).ready(function(){
+//    var sys = arbor.ParticleSystem(1000, 600, 0.5) // create the system with sensible repulsion/stiffness/friction
+//    sys.parameters({gravity:true}) // use center-gravity to make the graph settle nicely (ymmv)
+//    sys.renderer = Renderer("#viewport") // our newly created renderer will have its .init() method called shortly by sys...
+//	var defaultWidth = 80
+//	var defaultHeight = 53
+//	var defaultWeight = 4
+//
+//	//alert("Drawing the nodes");
+//    
+//	//adding the nodes to the graph
+//	for(var recommendation in recommendations)
+//	{
+//		var iconpath = "images/movieitem/" + recommendation.id + ".jpg";
+//		sys.addNode(recommendation.id, {icon:iconpath, width:defaultWidth, height:defaultHeight});	
+//	}
+//    
+//    //drawing the edges
+//    for(var key in attribute_matrix)
+//    {
+//    	for(var value in attribute_matrix[ key ])
+//    	{
+//    		var movies = attribute_matrix[ key ][ value ];
+//    		for(var i = 0; i < movies.length - 1; i++)
+//    		{
+//    			var current_item = sys.getNode(movies[ i ].id);
+//    			var current_next = sys.getNode(movies[ i + 1 ].id);
+//    			sys.addEdge(current_item, current_next, {weight:defaultWeight})
+//    		}
+//    	}
+//    }
+//    
+//	
+////    // add some nodes to the graph and watch it go...
+////	sys.addNode('a', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
+////	sys.addNode('b', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
+////	sys.addNode('c', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
+////	sys.addNode('d', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
+////	sys.addNode('e', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
+////	sys.addNode('f', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
+////	sys.addNode('g', {size:40, icon:null, width:defaultWidth, height:defaultHeight})
+////		
+////    sys.addEdge('a','b', {weight:defaultWeight})
+////    sys.addEdge('a','c', {weight:defaultWeight})
+////    sys.addEdge('a','d', {weight:defaultWeight})
+////    sys.addEdge('a','e', {weight:defaultWeight})
+////	sys.addEdge('e','f', {weight:defaultWeight})
+////	sys.addEdge('f','g', {weight:defaultWeight})
+//    
+//  })
+//
+//})(this.jQuery)
 
 
 function resizeNode(sys, parentNode, node, x, tweenLength, w, h, wgt, wx)

@@ -8,15 +8,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.sf.persist.annotations.NoColumn;
 import vrec.DefaultSettings;
 import vrec.data.Item;
+import vrec.data.ItemAttribute;
+import vrec.data.ItemRating;
 import vrec.data.JSONFilterable;
 import core.FilterNode;
 import core.Join;
+import core.OrderBy;
 import core.Query;
 import flexjson.JSONSerializer;
 
@@ -32,6 +36,8 @@ public class MovieItem extends Item implements JSONFilterable
     private String imdbId = "000000";
     private int ml_id = -1;
     private String trailerurl = "http://www.google.com";
+    
+    private float userrating = -1.0f;
     
     private List<MovieCastMember> castMembers;
     private List<MovieGenre> genres;
@@ -57,7 +63,47 @@ public class MovieItem extends Item implements JSONFilterable
     	}
     }
     
-    public static MovieItem retrieveByMl_Id(String ml_id)
+    public void updateAttributes()
+    {
+    	for(MovieGenre genre : this.getGenres())
+    	{
+    		String value = genre.getName();
+    		if(value != null && !value.isEmpty())
+    		{
+        		this.attributes.add(new ItemAttribute("genre", genre.getName()));
+    		}
+    	}
+    }
+    
+    public void updateUserRating(int user_mlid)
+    {
+    	Query query = new Query("itemrating");
+    	query.filter("userid", "" + user_mlid);
+    	query.filter("itemid", this.ml_id);
+    	query.filter("itemtype", DefaultSettings.getCurrent().getItemClass());
+    	List<ItemRating> results = query.run(ItemRating.class);
+    	if(results.size() == 1)
+    	{
+    		this.setUserrating(results.get(0).getRating());
+    	}
+    }
+    
+    public static List<MovieItem> retrieveRandomMovies(int k)
+    {
+    	List<MovieItem> movies = new ArrayList<MovieItem>();
+    	Random random = new Random();
+    	int min = 1;
+    	int max = DefaultSettings.getCurrent().getMovieMlMaxId();
+    	for(int i = 0; i < k; i++)
+    	{
+    		int ml_id = random.nextInt(max - min + 1) + min;
+    		MovieItem movie = MovieItem.retrieveByMl_Id(ml_id);
+    		movies.add(movie);
+    	}
+    	return movies;
+    }
+    
+    public static MovieItem retrieveByMl_Id(int ml_id)
     {
         Query query = new Query("movieitem");
         query.filter("ml_id", ml_id);
@@ -76,11 +122,11 @@ public class MovieItem extends Item implements JSONFilterable
         
         return items.get(0);
     }
-    
+        
     @Override
 	public JSONSerializer filter(JSONSerializer serializer) 
 	{
-		serializer = serializer.exclude("*.ersbRatingid", "*.posterUrl").include("*.ersb", "*.castMembers", "*.genres");
+		serializer = serializer.exclude("*.ersbRatingid", "*.posterUrl").include("*.ersb", "*.castMembers", "*.genres", "*.attributes");
 		return serializer;
 	}
     
@@ -121,6 +167,7 @@ public class MovieItem extends Item implements JSONFilterable
             Join join = new Join("moviecastmember", "id", "moviecastmemberdata", "castmemberid");
             join.filter(new FilterNode("movieid", id));
             query.join(join);
+            query.orderBy("membertype", OrderBy.ASC);
             castMembers = query.run(MovieCastMember.class);
         }
         return castMembers;
@@ -237,6 +284,22 @@ public class MovieItem extends Item implements JSONFilterable
 	 */
 	public void setTrailerurl(String trailerurl) {
 		this.trailerurl = trailerurl;
+	}
+
+	/**
+	 * @return the userrating
+	 */
+	@NoColumn
+	public float getUserrating() {
+		return userrating;
+	}
+
+	/**
+	 * @param userrating the userrating to set
+	 */
+	@NoColumn
+	public void setUserrating(float userrating) {
+		this.userrating = userrating;
 	}
     
 }

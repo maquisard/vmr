@@ -1,7 +1,71 @@
-body{
+/*body{
   margin:0;
   padding:20px;
   font:12px/17px Arial, sans-serif;
   background:#f9f9f9;
 }
+*/
 
+.movie_title_profile_row
+{
+	font-weight: bold; 
+	font-size: 1.05em; 
+	padding-top: 0.5em;
+	vertical-align: middle;
+}
+
+.movie_profile_row
+{
+	font-size: 0.95em; 
+	padding-top: 0.6em;
+	vertical-align: middle;
+}
+
+
+/*crazy auto generate styles  below --  do not modify */
+
+.auto-generate-button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #d1d1d1;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #d1d1d1;
+	box-shadow:inset 0px 1px 0px 0px #d1d1d1;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dbdbdb), color-stop(1, #c4c4c4) );
+	background:-moz-linear-gradient( center top, #dbdbdb 5%, #c4c4c4 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dbdbdb', endColorstr='#c4c4c4');
+	background-color:#dbdbdb;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #adabad;
+	display:inline-block;
+	color:#474747;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:34px;
+	line-height:34px;
+	width:114px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ebebeb;
+}
+.auto-generate-button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c4c4c4), color-stop(1, #dbdbdb) );
+	background:-moz-linear-gradient( center top, #c4c4c4 5%, #dbdbdb 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c4c4c4', endColorstr='#dbdbdb');
+	background-color:#c4c4c4;
+}
+.auto-generate-button:active {
+	position:relative;
+	top:1px;
+}

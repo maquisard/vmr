@@ -11,7 +11,4 @@
 			<p>Watched</p>
 		</div>
 	</div>	
-	<script type="text/javascript">
-	//load_watched_movies( );
-	</script>
 </div>

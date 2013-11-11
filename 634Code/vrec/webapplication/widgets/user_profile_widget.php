@@ -1,8 +1,5 @@
 
 <div id="user_profile_container" style="width: 200px;">
-	<script type="text/javascript">
-		retrieve_random_users();
-	</script>
 	<div id="random_users" style="width: 100%">
 		<select id="random_user_list" style="width: 150px;" onchange="set_current_user_in_session()">
 		</select>	
@@ -34,4 +31,7 @@
 			</tr>
 		</table>
 	</div>
+	<script type="text/javascript">
+		retrieve_random_users();
+	</script>
 </div>
