@@ -21,6 +21,50 @@
 	vertical-align: middle;
 }
 
+.attribute_list_container_class
+{
+	text-align: left;
+	width : 150px;
+}
+
+
+.accordion{
+    width: 270px;
+    background: #ffffff;
+    color: white;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 1.2em;
+}
+.accordion a{
+    display: block;
+    background: #ffffff;
+    color: #000000;
+    border: solid 1px black;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.accordion a:hover{
+    background: #AAAAAA;
+    color: white;
+    font-weight: bold;
+}
+
+.accordion .has-children.closed a{
+/*    background: #888888;
+    color: #ddffdd; */
+/*    background: #444444;
+    color: white;
+ */   
+}
+
+.accordion .has-children{
+
+}
+
+.accordion li{
+
+}
 
 /*crazy auto generate styles  below --  do not modify */
 

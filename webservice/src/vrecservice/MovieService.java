@@ -188,7 +188,7 @@ public class MovieService extends AbstractService
 	}
 	
 	@GET
-	@Path("add/queue/{movieid}")
+	@Path("/add/queue/{movieid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addToQueue(@PathParam("movieid") String movieid)
 	{
@@ -220,6 +220,66 @@ public class MovieService extends AbstractService
 		useritem.save();
 		
 		return new MessageResponse("Added to the queue.").output("add_queue_callback");
+	}
+	
+	
+	@GET
+	@Path("/add/browsed/{movieid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String addToBrowsed(@PathParam("movieid") String movieid)
+	{
+		if(movieid == null || movieid.isEmpty())
+		{
+			return new ErrorResponse("Invalid movie id").output("browsed_callback");
+		}
+		
+		MovieUser currentUser = this.getCurrentUser();
+		if(currentUser == null)
+		{
+			return new ErrorResponse("There is no user in the session, Please log in to execute this operation").output("browsed_callback");
+		}
+		MovieItem movie = MovieItem.retrieveById(MovieItem.class, movieid);
+		if(movie == null)
+		{
+			return new ErrorResponse("No movie was retrieved with id: " + movieid).output("browsed_callback");
+		}
+		
+		UserItem useritem = new UserItem();
+		useritem.setItemid("" + movie.getMl_id());
+		useritem.setUserid("" + currentUser.getMl_id());
+		useritem.setStatus(UserItem.BROWSED);
+		useritem.setItemtype(DefaultSettings.getCurrent().getItemClass());
+		if(UserItem.exist(useritem))
+		{
+			return new ErrorResponse("Movie is already in the browsed list The client should handle this case - " + movieid).output("browsed_callback");
+		}
+		useritem.save();
+		
+		List<MovieItem> movies = currentUser.retrieveBrowsedMovies();
+		for(MovieItem _movie : movies)
+		{
+			this.updateMovie(_movie, currentUser);
+		}
+		return new EntityCollectionResponse<MovieItem>(movies, true).output("browsed_callback");
+	}
+	
+	@GET
+	@Path("/browsed")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String browsed()
+	{
+		MovieUser currentUser = this.getCurrentUser();
+		if(currentUser == null)
+		{
+			return new ErrorResponse("There is no user in the session, Please log in to execute this operation").output("browsed_callback");
+		}
+		
+		List<MovieItem> movies = currentUser.retrieveBrowsedMovies();
+		for(MovieItem movie : movies)
+		{
+			this.updateMovie(movie, currentUser);
+		}
+		return new EntityCollectionResponse<MovieItem>(movies, true).output("browsed_callback");
 	}
 	
 	private void updateMovie(MovieItem movie, MovieUser user)

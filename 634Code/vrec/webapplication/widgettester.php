@@ -23,13 +23,20 @@
 <script src="extplugins/rating/jquery.rateit.min.js"></script>
 
 <script src="extplugins/arbor/arbor.js"></script>  
-<script src="extplugins/arbor/arbor-tween.js"></script>  
+<script src="extplugins/arbor/arbor-tween.js"></script> 
 
+<script src="extplugins/quiccordion/jquery.quiccordion.js"></script>
+
+<!-- script type="text/javascript" src="extplugins/navgoco/jquery.navgoco.min.js"></script>
+<link rel="stylesheet" href="extplugins/navgoco/jquery.navgoco.css" type="text/css" media="screen" /-->
+
+<!-- script type='text/javascript' src='extplugins/vaccordion/jquery.cookie.js'></script>
+<script type='text/javascript' src='extplugins/vaccordion/jquery.hoverIntent.minified.js'></script>
+<script type='text/javascript' src='extplugins/vaccordion/jquery.dcjqaccordion.2.7.min.js'></script-->
 
 <script type="text/javascript" src="client.js"></script>
 <script type="text/javascript">
 $(function() { $( "#tabs" ).tabs({ collapsible: true }); }); //loading the movie list tabs
-
 
 $(function() { $( "#user_rating_control" ).bind('rated', 
 		function() 
@@ -70,7 +77,7 @@ $(function() { $( "#user_rating_control" ).bind('over',
     			<td><?php include 'widgets/movie_profile_widget.php'; ?></td>
     		</tr>
     		<tr>
-    			<td></td>
+    			<td><?php include 'widgets/attribute_list_widget.php'; ?></td>
     			<td><?php include 'widgets/rec_visualization_widget.php'; ?></td>
     			<td></td>
     		</tr>

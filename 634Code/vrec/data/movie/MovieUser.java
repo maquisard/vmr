@@ -15,7 +15,6 @@ import vrec.data.User;
 import vrec.data.UserItem;
 import core.FilterNode;
 import core.Join;
-import core.OrderBy;
 import core.Query;
 import flexjson.JSONSerializer;
 
@@ -83,6 +82,17 @@ public class MovieUser extends User implements JSONFilterable
     	return users;
     }
     
+    public void clearBrowsedMovies()
+    {
+    	Query query = new Query("useritem");
+    	query.filter("userid", this.ml_id);
+    	query.filter("status", UserItem.BROWSED);
+    	for(UserItem useritem : query.run(UserItem.class))
+    	{
+    		useritem.delete();
+    	}
+    }
+    
     public List<MovieItem> retrieveMovieQueue(int index, int size)
     {
     	Query query = this.retrieveMoviesByStatus(UserItem.QUEUE);
@@ -101,7 +111,7 @@ public class MovieUser extends User implements JSONFilterable
     	Query query = new Query("movieitem");
     	query.setLimitIndex(index);
     	query.setLimitSize(size);
-    	query.orderBy("imdbrating", OrderBy.DESC);
+    	//query.orderBy("imdbrating", OrderBy.DESC);
     	Join join = new Join("movieitem", "ml_id", "itemrating", "itemid");
     	query.join(join);
     	FilterNode filter = new FilterNode("userid", "" + this.ml_id);
@@ -115,7 +125,7 @@ public class MovieUser extends User implements JSONFilterable
     	Query query = new Query("movieitem");
     	Join join = new Join("movieitem", "ml_id", "useritem", "itemid");
     	query.join(join);
-    	query.orderBy("imdbrating", OrderBy.DESC);
+    	//query.orderBy("imdbrating", OrderBy.DESC);
     	FilterNode userFilter = new FilterNode("userid", "" + this.ml_id);
     	userFilter.setTablename("useritem");
     	FilterNode statusFilter = new FilterNode("status", status);

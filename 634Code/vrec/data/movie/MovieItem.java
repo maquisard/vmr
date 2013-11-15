@@ -36,6 +36,7 @@ public class MovieItem extends Item implements JSONFilterable
     private String imdbId = "000000";
     private int ml_id = -1;
     private String trailerurl = "http://www.google.com";
+    private boolean posterExistence = true;
     
     private float userrating = -1.0f;
     
@@ -126,7 +127,7 @@ public class MovieItem extends Item implements JSONFilterable
     @Override
 	public JSONSerializer filter(JSONSerializer serializer) 
 	{
-		serializer = serializer.exclude("*.ersbRatingid", "*.posterUrl").include("*.ersb", "*.castMembers", "*.genres", "*.attributes");
+		serializer = serializer.exclude("*.ersbRatingid", "*.posterUrl").include("*.ersb", "*.castMembers", "*.genres", "*.attributes", "*.posterExistence");
 		return serializer;
 	}
     
@@ -301,5 +302,15 @@ public class MovieItem extends Item implements JSONFilterable
 	public void setUserrating(float userrating) {
 		this.userrating = userrating;
 	}
+
+	/**
+	 * @return the posterExistence
+	 */
+	@NoColumn
+	public boolean getPosterExistence() {
+		posterExistence = !this.posterUrl.contains("default");
+		return posterExistence;
+	}
+
     
 }

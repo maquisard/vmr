@@ -5,25 +5,44 @@
 
 
 var service_base_url = "http://localhost:8080/vrecservice/";
+
 var num_of_random_users = 6;
 var num_of_recommendations = 8;
+
 var current_response = null;
+var current_movie = null;
 var current_callback = null;
+
 var request_count = 0;
+
 var recommendations = null;
+
 var watched = null;
 var queue = null;
-var current_movie = null;
+var browsed = null;
+
 var attribute_matrix = null;
 var particleSystem = null;
 var selectedNode = null;
+var hoverNode = null;
 var traversed = new Array();
 
-var sys = arbor.ParticleSystem(1000, 600, 0.5);
+var selected_key = "genre";
+var selected_value = "";
+
+var grow_by_attribute = false;
+
+var sys = arbor.ParticleSystem(10000, 600, 0.5);
 
 function load_movie_queue( )
 {
 	var url = service_base_url + 'movie/queue/0/10';
+	send_get_request(url);
+}
+
+function load_browsed_movies( )
+{
+	var url = service_base_url + 'movie/browsed';
 	send_get_request(url);
 }
 
@@ -39,6 +58,11 @@ function add_movie_to_queue( movieid )
 	send_get_request(url);
 }
 
+function add_movie_to_browsed( movieid )
+{
+	var url = service_base_url + 'movie/add/browsed/' + movieid;
+	send_get_request(url);
+}
 
 function post_rating( value )
 {
@@ -46,6 +70,7 @@ function post_rating( value )
 	{
 		var url = service_base_url + 'movie/rating/' + value + '/' + current_movie.id;
 		send_get_request(url);
+		current_movie.userrating = value;
 	}
 }
 
@@ -111,6 +136,7 @@ function set_current_user_in_session()
 		
 		load_watched_movies( );
 		load_movie_queue( );
+		load_browsed_movies( );
 		load_recommendations( );
 	}
 	send_get_request(url);
@@ -177,6 +203,14 @@ function is_movie_in_queue( movieid )
 	return document.getElementById("q-" + movieid) != null;
 }
 
+function load_movie_from_browsed( movieid )
+{
+	var movie = find_movie_by_id( movieid, browsed );
+	current_movie = movie;
+	
+	load_movie( movie );
+	selectedNode = null;
+}
 function load_movie_from_queue( movieid )
 {
 	var movie = find_movie_by_id( movieid, queue );
@@ -369,6 +403,42 @@ function watched_callback( response )
 	hideGlassPane();
 }
 
+
+function browsed_callback( response )
+{
+	if(response.status)
+	{ 
+		if(response.entities.length == 0)
+		{
+			var html = "<div style='font-size: 2em;'>";
+			html += "Browsed movie list is empty.</div>";
+			document.getElementById("tabs-3").innerHTML = html;
+		}
+		else
+		{
+			//recommendations = response.entities;
+			browsed = response.entities;
+			var html = "<div style='overflow:auto; overflow-y: hidden;'><table><tr>";
+			for(var i = 0; i < response.entities.length; i++)
+			{
+				var entity = response.entities[i];
+				html += "<td><img onmouseover='emphasize(this, true)' onmouseout='emphasize(this, false)' onclick='load_movie_from_browsed(\"" + entity.id + "\")' id='b-" + 
+				entity.id + "'style='width: 80px; height: 120px;' alt='" + 
+				entity.title + "' src='images/movieitem/" + entity.id + ".jpg' /></td>";
+			}
+			html += "</tr></table></div>";
+			document.getElementById("tabs-3").innerHTML = html;
+		}
+	}
+	else
+	{
+		errorAlert("Application Error", response.message);
+	}
+	hideGlassPane();
+}
+
+
+
 function add_queue_callback( response ) 
 { 
 	if(!response.status)
@@ -447,6 +517,8 @@ function random_movies_callback( response )
 
 function recommend_movies_callback( response )
 {
+	clear_attribute_matrix( );
+	
 	if(response.status)
 	{
 		simpleAlert("Application Message", response.entities.length + " Recommendations.");
@@ -466,8 +538,8 @@ function recommend_movies_callback( response )
 		//adding the nodes to the graph
 		for(var i = 0; i < recommendations.length; i++)
 		{
-			var iconpath = "images/movieitem/" + recommendations[i].id + ".jpg";
-			sys.addNode(recommendations[i].id, {icon:iconpath, width:defaultWidth, height:defaultHeight});	
+			var iconpath = recommendations[i].posterExistence ? "images/movieitem/" + recommendations[i].id + ".jpg" : "images/nomovieicon.jpg";
+			sys.addNode(recommendations[i].id, {icon:iconpath, width:defaultWidth, height:defaultHeight, grow_by_attribute: false});	
 		}
 	    
 	    //drawing the edges
@@ -480,7 +552,25 @@ function recommend_movies_callback( response )
 	    		{
 	    			var current_item = sys.getNode(movies[ i ].id);
 	    			var current_next = sys.getNode(movies[ i + 1 ].id);
-	    			sys.addEdge(current_item.name, current_next.name, {weight:defaultWeight})
+	    			if(sys.getEdges(current_item, current_next).length > 0 || sys.getEdges(current_next, current_item).length > 0)
+	    			{
+	    				edges = sys.getEdges(current_item, current_next).concat(sys.getEdges(current_next, current_item));
+	    				for(var i = 0; i < edges.length; i++)
+	    				{
+	    					if(edges[i].data.label == "")
+	    					{
+	    						edges[i].data.label = value;
+	    					}
+	    					else
+	    					{
+	    						edges[i].data.label += " | " + value;
+	    					}
+	    				}
+	    			}
+	    			else
+	    			{
+		    			sys.addEdge(current_item.name, current_next.name, {weight:defaultWeight, showlabel:false, label:value, length:6})
+	    			}
 	    		}
 	    	}
 	    }
@@ -563,6 +653,14 @@ function get_current_renderer( canvas )
           ctx.moveTo(pt1.x, pt1.y)
           ctx.lineTo(pt2.x, pt2.y)
           ctx.stroke()
+          
+          if(edge.data.showlabel)
+          {
+        	  ctx.fillStyle = "black";
+              ctx.font = '15px bold sans-serif';
+              ctx.fillText (edge.data.label, (pt1.x + pt2.x) / 2, (pt1.y + pt2.y) / 2);        	  
+          }
+          
         })
 
         particleSystem.eachNode(function(node, pt)
@@ -592,17 +690,56 @@ function get_current_renderer( canvas )
 			  ctx.rect(x - 2, y - 2, node.data.width + 2, node.data.height + 2);
 			  ctx.stroke();		  
 		  }
+		  
+		  if(node.data.grow_by_attribute)
+		  {
+			  ctx.beginPath();
+			  ctx.lineWidth="12";
+			  ctx.strokeStyle="#3399FF";
+			  ctx.rect(x - 2, y - 2, node.data.width + 2, node.data.height + 2);
+			  ctx.stroke();		  
+		  }
+		  
         })    			
       },
       
       initMouseHandling:function(){
         // no-nonsense drag and drop (thanks springy.js)
         var dragged = null;
-        var dragging = false;
 
         // set up a handler object that will initially listen for mousedowns then
         // for moves and mouseups while dragging
         var handler = {
+          moved:function(e) {
+              var pos = $(canvas).offset();
+              _mouseP = arbor.Point(e.pageX-pos.left, e.pageY-pos.top)
+              dragged = particleSystem.nearest(_mouseP);
+              
+              if (dragged && dragged.node !== null && hoverNode !== dragged.node) {
+                  dragged.node.fixed = true
+                  
+//                  var all_edges;
+//                  
+//                  if(hoverNode != null)
+//                  {
+//                      all_edges = sys.getEdgesFrom(hoverNode).concat(sys.getEdgesTo(hoverNode));
+//                      for(var i = 0; i < all_edges.length; i++)
+//                      {
+//                    	  all_edges[i].data.showlabel = false;
+//                      }
+//                  }
+//                  
+//                  hoverNode = dragged.node
+//                  
+//                  all_edges = sys.getEdgesFrom(dragged.node).concat(sys.getEdgesTo(dragged.node));
+//                  for(var i = 0; i < all_edges.length; i++)
+//                  {
+//                	  all_edges[i].data.showlabel = true;
+//                  }
+              }
+              return false
+          },	
+          
           clicked:function(e){
             var pos = $(canvas).offset();
             _mouseP = arbor.Point(e.pageX-pos.left, e.pageY-pos.top)
@@ -612,6 +749,52 @@ function get_current_renderer( canvas )
             if (dragged && dragged.node !== null){
               // while we're dragging, don't let physics move the node
               dragged.node.fixed = true
+              
+              
+              if(hoverNode !== dragged.node)
+              {
+                  var all_edges;
+                  
+                  if(hoverNode != null)
+                  {
+                      all_edges = sys.getEdgesFrom(hoverNode).concat(sys.getEdgesTo(hoverNode));
+                      for(var i = 0; i < all_edges.length; i++)
+                      {
+                    	  all_edges[i].data.showlabel = false;
+                      }
+                  }
+                  
+                  hoverNode = dragged.node
+                  
+                  all_edges = sys.getEdgesFrom(dragged.node).concat(sys.getEdgesTo(dragged.node));
+                  for(var i = 0; i < all_edges.length; i++)
+                  {
+                	  all_edges[i].data.showlabel = true;
+                  }
+              }
+              
+	            //handling double click here
+	            now = new Date().getTime();
+				if(!previous_click)
+				{
+					previous_click = now;
+				}
+				else
+				{
+					duration = now - previous_click;
+					previous_click = undefined;
+					if(duration <= 400 && selectedNode.name == dragged.node.name) //doubleclicking the same node
+					{
+						//alert("Olay, double click detected");
+						clear_attribute_matrix( );
+						load_recommendations( selectedNode.name );
+						add_movie_to_browsed( selectedNode.name );
+						$("#movie_profile_container").hide();
+						//dragged.node = null;
+						
+						return false
+					}
+				}
 			  
 			  if(selectedNode != dragged.node)
 			  {
@@ -619,6 +802,7 @@ function get_current_renderer( canvas )
 				{
 					//particleSystem.tweenNode(selectedNode, tweenLength, {width:defaultWidth, height:defaultHeight})
 				}
+								
 				selectedNode = dragged.node
 //				particleSystem.tweenNode(selectedNode, tweenLength, {width:80, height:120})
 //				resizeNode(particleSystem, null, selectedNode, 0.10, tweenLength, 80, 120, defaultWeight, 0.2)
@@ -630,28 +814,11 @@ function get_current_renderer( canvas )
             
 			$(canvas).bind('mousemove', handler.dragged)
             $(window).bind('mouseup', handler.dropped)
-            
-            //handling double click here
-            now = new Date().getTime();
-			if(!previous_click)
-			{
-				previous_click = now;
-			}
-			else
-			{
-				duration = now - previous_click;
-				previous_click = undefined;
-				if(duration <= 800 && !dragging)
-				{
-					alert("Olay, double click detected");
-					load_recommendations( selectedNode.name );
-					dragging = false;
-				}
-			}
+            $(canvas).unbind('mousemove', handler.moved);            
 
             return false
           },
-          
+                    
           dragged:function(e){
             var pos = $(canvas).offset();
             var s = arbor.Point(e.pageX-pos.left, e.pageY-pos.top)
@@ -661,7 +828,6 @@ function get_current_renderer( canvas )
               dragged.node.p = p
             }
             
-            dragging = true;
 
             return false
           },
@@ -673,9 +839,9 @@ function get_current_renderer( canvas )
             dragged = null
             $(canvas).unbind('mousemove', handler.dragged)
             $(window).unbind('mouseup', handler.dropped)
-            _mouseP = null
+            $(canvas).bind('mousemove', handler.moved);
             
-            dragging = false;
+            _mouseP = null
             
             return false
           }
@@ -683,7 +849,7 @@ function get_current_renderer( canvas )
         
         // start listening
         $(canvas).mousedown(handler.clicked);
-
+        $(canvas).mousemove(handler.moved);
       },
       
     }
@@ -831,11 +997,30 @@ function clear_movies_from_canvas()
 	});
 }
 
+function clear_attribute_matrix( )
+{
+	//doing a detailed cleaning
+	for(var key in attribute_matrix)
+	{
+		for(var value in attribute_matrix[key])
+		{
+			attribute_matrix[key][value].length = 0;
+		}
+		attribute_matrix[key].length = 0;
+	}
+	
+	if(attribute_matrix != null)
+	{
+		attribute_matrix.length = 0;
+	}
+}
+
 function build_attribute_matrix( movies )
 {
 	attribute_matrix = null; //trying to trigger the garbage collection
 	attribute_matrix = { };
-		
+	clear_attribute_widget( );
+	
 	for(var i = 0; i < movies.length; i++)
 	{
 		var movie = movies[i];
@@ -855,4 +1040,114 @@ function build_attribute_matrix( movies )
 			attribute_matrix[attribute.key][attribute.value].push(movie);
 		}
 	}
+	
+	load_attributes_widget( );
+}
+
+function emphasize_by_attributes(_selected_key, selected_value, new_w, new_h, new_w1, new_h1, grow_by_attribute)
+{
+	var movies = attribute_matrix[_selected_key][selected_value];
+	
+	sys.eachNode(function(node, pt) {
+		if( find_movie_by_id(node.name, movies) !== null )
+		{
+			node.data.grow_by_attribute = grow_by_attribute;
+			sys.tweenNode(node, 0.01, {width:new_w, height:new_h});
+		}
+		else
+		{
+			sys.tweenNode(node, 0.01, {width:new_w1, height:new_h1});
+		}
+	});		
+}
+
+function load_attributes_widget( )
+{
+	var navigation = $("#attribute_list");
+	for(var key in attribute_matrix)
+	{
+		var element;
+		if(key == selected_key) element = '<li><a href="#" style="background: #444444; color: white">' + key + '</a>';
+		else element = '<li><a href="#">' + key + '</a>';
+		
+		//console.log(attribute_matrix);
+		if(get_value_size( key ) > 0)
+		{
+			element += '<ul>';
+			for(var value in attribute_matrix[key])
+			{
+				element += '<li><a href="#">' + value + '</a></li>';
+			}
+			element += '</ul>';
+		}
+		navigation.prepend(element + '</li><li><a href="#">user age</a></li>');
+	}
+	
+	$("#attribute_list").quiccordion();
+	
+	$("#attribute_list a").mouseover(function(e) {
+		if($(this).parent().parent().parent().attr("id") == "attribute_list_container") { }
+		else { 
+			grow_by_attribute = true;
+			emphasize_by_attributes(selected_key, $(this).text(), 120, 180, 40, 60, true);
+		}
+	});
+	
+	$("#attribute_list a").mouseout(function(e) {
+		if($(this).parent().parent().parent().attr("id") == "attribute_list_container") { }
+		else {
+			grow_by_attribute = false;
+			emphasize_by_attributes(selected_key, $(this).text(), 80, 120, 80, 120, false);
+		}
+	});
+	
+    $("#attribute_list a").click(function(e) {
+        e.preventDefault();
+    	var selected_text = $(this).text();
+    	if($(this).parent().parent().parent().attr("id") == "attribute_list_container") //this is a key
+    	{
+    		if(selected_text !== selected_key)
+    		{
+    			$(this).parent().siblings("li").children("a").css('background', "");
+    			$(this).parent().siblings("li").children("a").css('color', "#444444");
+    			selected_key = selected_text;
+    	        $(this).css('background', "#AAAAAA");
+    	        $(this).css('color', "white");
+    		}
+    	}
+    	
+//    	else
+//    	{
+//    		if(selected_text !== selected_value)
+//    		{
+//    			$(this).parent().siblings("li").children("a").css('background-color', "");
+//    			$(this).parent().siblings("li").children("a").css('color', "#444444");
+//    			selected_value = selected_text;
+//    	        $(this).css('background', "#AAAAAA");
+//    	        $(this).css('color', "white");
+//    		}
+//    	}
+    });
+    
+}
+
+
+function clear_attribute_widget( )
+{
+	$("#attribute_list").empty();
+}
+
+function get_key_size( )
+{
+	var count = 0;
+	for(var key in attribute_matrix) count++;
+	
+	return count;
+}
+
+function get_value_size( key )
+{
+	var count = 0;
+	for(var value in attribute_matrix[key]) count++;
+	return count;
 }

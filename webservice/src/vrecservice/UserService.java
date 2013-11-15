@@ -39,7 +39,7 @@ public class UserService extends AbstractService
 		if(user == null) return new ErrorResponse("No User found with id: " + ml_id).output();
 		
 		this.setCurrentUser(user);
-		
+		user.clearBrowsedMovies();
 		return new EntityResponse<MovieUser>(user, true).output();
 	}
 	
