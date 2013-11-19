@@ -7,7 +7,7 @@
 var service_base_url = "http://localhost:8080/vrecservice/";
 
 var num_of_random_users = 6;
-var num_of_recommendations = 8;
+var num_of_recommendations = 14;
 
 var current_response = null;
 var current_movie = null;
@@ -138,6 +138,8 @@ function set_current_user_in_session()
 		load_movie_queue( );
 		load_browsed_movies( );
 		load_recommendations( );
+		$("#movie_profile_container").hide();
+
 	}
 	send_get_request(url);
 }
@@ -241,7 +243,7 @@ function load_movie( movie )
 {
 	
 	$("#movie_profile_container").show();
-	
+
 	
 	$("#movie_profile_image").attr({
 		src : "images/movieitem/" + movie.id + ".jpg",
@@ -1080,7 +1082,7 @@ function load_attributes_widget( )
 			}
 			element += '</ul>';
 		}
-		navigation.prepend(element + '</li><li><a href="#">user age</a></li>');
+		navigation.prepend(element);
 	}
 	
 	$("#attribute_list").quiccordion();

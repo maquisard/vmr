@@ -1,4 +1,4 @@
-<div id="user_movies_container" style="width: 850px;">
+<div id="user_movies_container" style="width: 100%; ">
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">Queue</a></li>

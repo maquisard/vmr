@@ -1,10 +1,42 @@
-/*body{
-  margin:0;
-  padding:20px;
-  font:12px/17px Arial, sans-serif;
-  background:#f9f9f9;
+.user_info_row
+{
+	margin: 5px;
+	border-bottom: 1px solid;
 }
-*/
+
+#leftColumn {
+	width: 15%;
+	height: 100%;
+	vertical-align : top;
+}
+
+#firstRight {
+	width : 88%;
+	height: 100%;
+}
+
+#upperRight {
+	height : 80%;
+	width  : 88%;
+}
+
+#rightColumn {
+	width: 17%;
+	height: 100%;
+}
+
+
+#center {
+	width: 83%;
+	height:100%;
+}
+
+#footer {
+	width: 88%;
+	height: 20%;
+}
+
+
 
 .movie_title_profile_row
 {
