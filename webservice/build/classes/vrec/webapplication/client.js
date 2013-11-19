@@ -992,6 +992,52 @@ function hideGlassPane()
 	}
 }
 
+
+function update_visualization(selected_key)
+{
+    clear_movies_from_canvas( );
+
+	for(var i = 0; i < recommendations.length; i++)
+	{
+		var iconpath = recommendations[i].posterExistence ? "images/movieitem/" + recommendations[i].id + ".jpg" : "images/nomovieicon.jpg";
+		sys.addNode(recommendations[i].id, {icon:iconpath, width:defaultWidth, height:defaultHeight, grow_by_attribute: false});	
+	}
+    
+    //drawing the edges
+    //for(var key in attribute_matrix)
+    {
+    	for(var value in attribute_matrix[ selected_key ])
+    	{
+    		var movies = attribute_matrix[ selected_key ][ value ];
+    		for(var i = 0; i < movies.length - 1; i++)
+    		{
+    			var current_item = sys.getNode(movies[ i ].id);
+    			var current_next = sys.getNode(movies[ i + 1 ].id);
+    			if(sys.getEdges(current_item, current_next).length > 0 || sys.getEdges(current_next, current_item).length > 0)
+    			{
+    				edges = sys.getEdges(current_item, current_next).concat(sys.getEdges(current_next, current_item));
+    				for(var i = 0; i < edges.length; i++)
+    				{
+    					if(edges[i].data.label == "")
+    					{
+    						edges[i].data.label = value;
+    					}
+    					else
+    					{
+    						edges[i].data.label += " | " + value;
+    					}
+    				}
+    			}
+    			else
+    			{
+	    			sys.addEdge(current_item.name, current_next.name, {weight:defaultWeight, showlabel:false, label:value, length:6})
+    			}
+    		}
+    	}
+    }
+}
+
+
 function clear_movies_from_canvas()
 {
 	sys.eachNode(function(node, pt) {
@@ -1115,6 +1161,8 @@ function load_attributes_widget( )
     			selected_key = selected_text;
     	        $(this).css('background', "#AAAAAA");
     	        $(this).css('color', "white");
+    	            	        
+    	        update_visualization(selected_key);
     		}
     	}
     	
